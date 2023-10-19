@@ -7,6 +7,9 @@ $link-decoration: none;
 // 3. Include remainder of required Bootstrap stylesheets
 @import "../node_modules/bootstrap/scss/variables";
 @import "../node_modules/bootstrap/scss/variables-dark";
+@import "../node_modules/bootstrap/scss/mixins";
+
+@import "../node_modules/bootstrap/scss/bootstrap";
 
 // 4. Include any default map overrides here
 $custom-colors: (
@@ -18,3 +21,6 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 @import "bootstrapComponents";
 
 // 5. Du kan lave styling her...
+html{
+	scroll-behavior: smooth;
+}
