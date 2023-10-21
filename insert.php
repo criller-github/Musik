@@ -5,9 +5,14 @@ $message = '';
 
 if (!empty($_POST["data"])) {
     $data = $_POST["data"];
+    $file = $_FILES;
+
+    if(!empty($file["musOmslag"]["tmp_name"])){
+        move_uploaded_file($file["musOmslag"]["tmp_name"], "uploads/" . basename($file["musOmslag"]["name"]));
+    }
 
     $sql = "INSERT INTO musik (musSangTitel, musKunstnerNavn, musAlbumTitel, musUdgivelsesdato, musProducent, musGenre, musTekster, musOmslag, musOmslagKunstner, musPris) VALUES(:musSangTitel, :musKunstnerNavn, :musAlbumTitel, :musUdgivelsesdato, :musProducent, :musGenre, :musTekster, :musOmslag, :musOmslagKunstner, :musPris)";
-    $bind = [":musSangTitel" => $data["musSangTitel"], ":musKunstnerNavn" => $data["musKunstnerNavn"], ":musAlbumTitel" => $data["musAlbumTitel"], ":musUdgivelsesdato" => $data["musUdgivelsesdato"], ":musProducent" => $data["musProducent"], ":musGenre" => $data["musGenre"], ":musTekster" => $data["musTekster"], ":musOmslag" => $data["musOmslag"], ":musOmslagKunstner" => $data["musOmslagKunstner"], ":musPris" => $data["musPris"]];
+    $bind = [":musSangTitel" => $data["musSangTitel"], ":musKunstnerNavn" => $data["musKunstnerNavn"], ":musAlbumTitel" => $data["musAlbumTitel"], ":musUdgivelsesdato" => $data["musUdgivelsesdato"], ":musProducent" => $data["musProducent"], ":musGenre" => $data["musGenre"], ":musTekster" => $data["musTekster"], ":musOmslag" => (!empty($file["musOmslag"]["tmp_name"])) ? $file["musOmslag"]["name"] : NULL, ":musOmslagKunstner" => $data["musOmslagKunstner"], ":musPris" => $data["musPris"]];
 
     $db->sql($sql, $bind, false);
 
@@ -50,7 +55,7 @@ if (!empty($_POST["data"])) {
         } else {
             ?>
             <div class="col-10 d-flex justify-content-center align-items-center">
-                <form method="post" action="insert.php">
+                <form method="post" action="insert.php" enctype="multipart/form-data">
                     <!-- Sang titel -->
                     <div class="col mt-5 mt-3 fs-4">
                         <div class="form-group">
@@ -111,11 +116,10 @@ if (!empty($_POST["data"])) {
 
                     <!-- Omslag -->
                     <div class="col mt-5 fs-4">
-                        <div class="form-group">
-                            <label for="musOmslag">Omslag</label>
-                            <input class="form-control" type="text" name="data[musOmslag]" id="musOmslag" placeholder="Link til omslag" value="">
-                        </div>
+                        <label class="form-label" for="musOmslag">Omslag Billede</label>
+                        <input type="file" class="form-control" id="musOmslag" name="musOmslag">
                     </div>
+
 
                     <!-- Omslag Kunstner -->
                     <div class="col mt-5 fs-4">
