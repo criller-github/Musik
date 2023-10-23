@@ -77,7 +77,7 @@ if (!empty($_POST["data"])) {
                     <!-- Album Titel -->
                     <div class="col mt-5 fs-4">
                         <div class="form-group">
-                            <label for="musAlbumTitel">Album Titl</label>
+                            <label for="musAlbumTitel">Album Titel</label>
                             <input class="form-control" type="text" name="data[musAlbumTitel]" id="musAlbumTitel" placeholder="Album Titel" value="">
                         </div>
                     </div>
