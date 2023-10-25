@@ -1,7 +1,7 @@
 <?php
 require "classes/classDB.php";
 
-define("CONFIG_LIVE", "0"); // 0: Test enviroment || 1: Live enviroment
+define("CONFIG_LIVE", "1"); // 0: Test enviroment || 1: Live enviroment
 
 if(CONFIG_LIVE == 1){
     $DB_SERVER = "localhost";
@@ -10,7 +10,7 @@ if(CONFIG_LIVE == 1){
     $DB_PASS = "";
 }else{
     $DB_SERVER = "mysql44.unoeuro.com";
-    $DB_NAME = " bresson_portfolio_dk_db";
+    $DB_NAME = "bresson_portfolio_dk_db";
     $DB_USER = "bresson_portfolio_dk";
     $DB_PASS = "yREhDgAtBkm5pcd26wx3";
 }
