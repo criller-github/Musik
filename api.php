@@ -24,30 +24,8 @@ $data = json_decode(file_get_contents('php://input'), true);
 
 header('content-type: application/json; charset=utf-8');
 
-if(isset($data["password"]) && $data["password"] == "123"){
-    $sql = "SELECT * FROM musik WHERE 1=1";
-    $bind = [];
+$data["password"] = "123";
 
-    if (!empty($data["nameSearch"])){
-        $sql .= " AND musSangTitel = :musSangTitel ";
-        $bind[":musSangTitel"] = $data["nameSearch"];
-    }
-
-    $musik = $db->sql($sql, $bind);
-    header("HTTP/1.1 200 OK");
-
-    echo json_encode($musik);
-
-} else {
-    header("HTTP/1.1 401 Unauthorized");
-    $error["errorMessage"] = "Dit kodeord var forkert";
-    echo json_encode($error);
-}
-?>
-
-
-<?php
-require "settings/init.php";
 
 $data = json_decode(file_get_contents('php://input'), true);
 
@@ -55,9 +33,9 @@ if(isset($data["password"]) && $data["password"] == "123"){
     $sql = "SELECT * FROM musik WHERE 1=1";
     $bind = [];
 
-    if (!empty($data["nameSearch"])){
-        $sql .= " AND musSangTitel = :musSangTitel ";
-        $bind[":musSangTitel"] = $data["nameSearch"];
+    if (!empty($data["nameSearch"])) {
+        $sql .= " AND (musSangTitel LIKE :searchKeyword OR musKunstnerNavn LIKE :searchKeyword OR musAlbumTitel LIKE :searchKeyword) ";
+        $bind[":searchKeyword"] = '%' . $data["nameSearch"] . '%';
     }
 
     $sql .= " ORDER BY musID";

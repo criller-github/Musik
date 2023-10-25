@@ -23,4 +23,35 @@ $theme-colors: map-merge($theme-colors, $custom-colors);
 // 5. Du kan lave styling her...
 html{
 	scroll-behavior: smooth;
+
+}
+
+.products .items .card-img-top{
+	height: 200px;
+	object-fit: cover;
+}
+
+
+.bg-dark-transparent {
+	background-color: rgba(0, 0, 0, 0.5);
+	border-radius: 3px;
+}
+
+.navbar {
+	background-color: #2e323e;
+}
+
+.custom-search-bar {
+	width: 500px; /* Adjust the width as needed */
+	position: absolute;
+	top: 25px;
+}
+
+.white-icon {
+	color: white;
+}
+
+
+.breadcrumb-item a {
+	color: #2e323e;
 }

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="utf-8">
+
+  <title>Sigende titel</title>
+
+  <meta name="robots" content="All">
+  <meta name="author" content="Udgiver">
+  <meta name="copyright" content="Information om copyright">
+
+  <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/styles.css" rel="stylesheet" type="text/css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+
+<div class="container">
+
+  <div class="products">
+    <div class="filter p-5">
+      <div class="row">
+        <div class="col-md-4 offset-md-4">
+          <input type="search" class="form-control nameSearch" placeholder="Søg og du skal finde">
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="items">
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script type="module">
+  import Products from "./js/products.js";
+  const products = new Products();
+  products.init();
+</script>
+
+
+<script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+
+   <script type="module">
+  /* import Prom from "./js/promise.js";
+
+   const prom = new Prom();
+
+    prom.kageEllerHvad();
+
+   prom.skalKimGiveKage(true).then((response) => {
+
+     console.log(response);
+     prom.kageEllerHvad();
+
+     prom.erDetEnStorKage('medium').then((response) => {
+       console.log(response);
+     }).catch((error) => {
+       console.log(error);
+     });
+
+   }).catch((error) => {
+     console.log(error);
+   });
+
+ */
+</script>
+</body>
+</html>

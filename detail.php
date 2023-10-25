@@ -20,111 +20,122 @@ require "settings/init.php";
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
+<header>
+</header>
 
 
-<body>
+<body style="background-color: #fafafa">
 
 
 <div class="container-fluid">
-
-
-    <div class="row d-flex justify-content-center align-items-center">
-        <form method="post" class="col-sm-8 col-md-6 col-lg-4 mt-5">
-            <label class=" fs-4" for="song_id">Sang ID: </label>
-            <br>
-            <div class="input-group mt-2 mb-3">
-                <input type="text" class="form-control" placeholder="Sang ID (80-99)" aria-label="Recipient's username" aria-describedby="button-addon2" name="song_id" id="song_id">
-                <button class="btn btn-outline-secondary" type="submit" value="Vis Sang">Tryk</button>
-            </div>
-        </form>
-    </div>
     <?php
-    if (isset($_POST['song_id'])) {
-    $songId = $_POST['song_id'];
-    $query = "SELECT * FROM musik WHERE musID = $songId";
-    $musik = $db->sql($query);
+    // Retrieve the product ID
+    $product_id = $_GET['musID'];
+
+    // Check the ID
+    if (!empty($product_id) && is_numeric($product_id)) {
+    $musik = $db->sql("SELECT * FROM musik WHERE musID = $product_id");
 
     if (!empty($musik)) {
-    $musikItem = $musik[0];
+    $musik = $musik[0]; // only expect one result
     ?>
 
         <div class="row d-flex justify-content-center align-items-center">
+
                 <div class="col-sm-10 col-md-8 col-lg-6 mt-5 mb-5">
-                    <div class="card w-100">
-                        <div class="card-header d-flex align-items-center" style="background-image: url('uploads/<?php echo $musikItem->musOmslag; ?>'); background-size: cover; background-position: center; height: 200px;">
-                                <h3 class="text-white align-self-center"><?php echo $musikItem->musSangTitel; ?></h3>
+                    <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.php">Hjem</a></li>
+                            <li class="breadcrumb-item active" aria-current="page"><?php echo $musik->musSangTitel; ?></li>
+                        </ol>
+                    </nav>
+                    <div class="card border-light w-100">
+                        <div class="card-header d-flex align-items-center" style="background-image: url('uploads/<?php echo $musik->musOmslag; ?>'); background-size: cover; background-position: center; height: 200px;">
+                                <h1 class="text-white align-self-center text-light bg-dark-transparent">&nbsp;<?php echo $musik->musSangTitel; ?>&nbsp;</h1>
                         </div>
 
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">
-                                <div class="row">
+                                <div class="row text-muted">
                                     <div>
-                                        <h5>Kunstner:</h5>
+                                        Kunstner:
                                     </div>
                                     <div>
+                                        <h5>
                                         <?php
-                                        echo $musikItem->musKunstnerNavn;
+                                        echo $musik->musKunstnerNavn;
                                         ?>
+                                        </h5>
                                     </div>
                                 </div>
                             </li>
                             <li class="list-group-item">
-                                <div class="row">
+                                <div class="row text-muted">
                                     <div>
-                                        <h5>Album:</h5>
+                                        Album:
                                     </div>
                                     <div>
+                                        <h5>
                                         <?php
-                                        echo $musikItem->musAlbumTitel;
+                                        echo $musik->musAlbumTitel;
                                         ?>
+                                        </h5>
                                     </div>
                                 </div>
                             </li>
                             <li class="list-group-item">
-                                <div class="row">
+                                <div class="row text-muted">
                                     <div>
-                                        <h5>Udgivelsesdato:</h5>
+                                        Udgivelsesdato:
                                     </div>
                                     <div>
+                                        <h5>
                                         <?php
-                                        echo $musikItem->musUdgivelsesdato;
+                                        echo $musik->musUdgivelsesdato;
                                         ?>
+                                        </h5>
                                     </div>
                                 </div>
                             </li>
                             <li class="list-group-item">
-                                <div class="row">
+                                <div class="row text-muted">
                                     <div>
-                                        <h5>Producent:</h5>
+                                        Producent:
                                     </div>
                                     <div>
+                                        <h5>
                                         <?php
-                                        echo $musikItem->musProducent;
+                                        echo $musik->musProducent;
                                         ?>
+                                        </h5>
                                     </div>
                                 </div>
                             </li>
                             <li class="list-group-item">
-                                <div class="row">
+                                <div class="row text-muted">
                                     <div>
-                                        <h5>Genre:</h5>
+                                        Genre:
                                     </div>
                                     <div>
+                                        <h5>
                                         <?php
-                                        echo $musikItem->musGenre;
+                                        echo $musik->musGenre;
                                         ?>
+                                        </h5>
                                     </div>
                                 </div>
                             </li>
                             <li class="list-group-item">
-                                <div class="row">
+                                <div class="row text-muted">
                                     <div>
-                                        <h5>Label:</h5>
+                                        Label:
                                     </div>
                                     <div>
+                                        <h5>
                                         <?php
-                                        echo $musikItem->musOmslagKunstner;
+                                        echo $musik->musOmslagKunstner;
                                         ?>
+                                        </h5>
                                     </div>
                                 </div>
                             </li>
@@ -134,13 +145,13 @@ require "settings/init.php";
                         <div class="card-body text-muted">
                             <button class="btn btn-outline-dark btn-lg" id="showLyricsBtn">Lyrikken</button>
                             <div id="lyrics" style="display: none;">
-                                <?php echo $musikItem->musTekster; ?>
+                                <?php echo $musik->musTekster; ?>
                             </div>
                         </div>
-                        <div class="card-footer">
-                            <h4>
+                        <div class="card-footer" style="background-color: #2e323e">
+                            <h4 class="text-white">
                                 <?php
-                                echo $musikItem->musPris;
+                                echo $musik->musPris;
                                 ?> DKK
                             </h4>
 
@@ -159,14 +170,15 @@ require "settings/init.php";
                     });
                 </script>
 
-                <?php
+        </div>
+            <?php
             } else {
-                echo "Song not found.";
+                echo "Product not found";
             }
-        }
-        ?>
-
-    </div>
+            } else {
+                echo "Invalid product ID";
+            }
+            ?>
 </div>
 
 

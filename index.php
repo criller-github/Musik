@@ -18,36 +18,48 @@ require "settings/init.php";
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
-<body
-<div class="row g-2">
-	<?php
-	$musik = $db->sql("SELECT * FROM musik");
-	foreach($musik as $musik) {
-		?>
-		<div class="col-12 col-md-6">
-			<div class="card w-100">
-				<div class="card-header">
-					<?php
-					echo $musik->musSangTitel;
-					?>
-				</div>
-				<div class="card-body">
-					<?php
-					// Indsæt andet felt fra database
-					?>
-				</div>
-				<div class="card-footer text-muted">
-					<?php
-					// Indsæt andet felt fra database
-					?>
-				</div>
-			</div>
-		</div>
-		<?php
-	}
-	?>
-</div>
+<header>
+    <nav class="navbar navbar-light pb-4 align-items-center">
+        <div class="container-fluid align-items-center">
+            <i class="fa-brands fa-itunes-note fa-2x white-icon align-items-center pt-3 px-3"></i>
+        </div>
+    </nav>
+</header>
 
+
+<body style="background-color: #fafafa">
+    <div class="products">
+        <div class="filter">
+            <div class="row">
+                <div class="col-4 offset-4 mb-5">
+                    <input type="search" class="form-control nameSearch custom-search-bar" placeholder="Søg og du skal finde">
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="container mb-5">
+            <div class="items">
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+<script type="module">
+    import Products from "./js/products.js";
+    const products = new Products();
+    products.init();
+</script>
+
+
+<script src="https://kit.fontawesome.com/a188e3149f.js" crossorigin="anonymous"></script>
 <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
